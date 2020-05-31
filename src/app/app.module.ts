@@ -14,16 +14,33 @@ import { ComponentesModule } from './componentes/componentes.module';
 
 
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule,ComponentesModule],
   providers: [
     StatusBar,
-    SplashScreen,InAppBrowser,
+    SplashScreen,InAppBrowser,SocialSharing,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
+
+
+
+
+
+//to lad changes ionic build then npx cap copy
+
+//
+//ionic cordova prepare android
+//ionic cordova build android
+//abrir en android studio la carpeta de platforms / android
+
+//Para el live reload 
+//ionic cordova run --list
+//ionic cordova run android --target=MIGENIMOTION
+////ionic cordova run android --target=MIGENIMOTION -l
+//para ver lo de consola ir a google chrome herramientas desarrollo  more tools remote devices
