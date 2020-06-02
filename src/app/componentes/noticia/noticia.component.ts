@@ -4,6 +4,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ActionSheetController } from '@ionic/angular';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { DataLocalService } from 'src/app/services/data-local.service';
+import { ToastController } from '@ionic/angular';
 @Component({
   selector: 'app-noticia',
   templateUrl: './noticia.component.html',
@@ -18,10 +19,17 @@ icono="star";
   constructor(private inAppBrowser:InAppBrowser,
     private actionSheetCtrl:ActionSheetController,
     private socialSharing:SocialSharing,
-    private dataLocal:DataLocalService) { 
+    private dataLocal:DataLocalService,
+    public toastController: ToastController) { 
       
     }
-
+    async presentToast(message) {
+      const toast = await this.toastController.create({
+        message: message,
+        duration: 2000
+      });
+      toast.present();
+    }
   ngOnInit() {
     if(this.enFavoritos){
       this.mensaje="Borrar de favoritos"
@@ -61,9 +69,11 @@ icono="star";
         cssClass:'action-dark',
         handler: () => {
           if(this.enFavoritos){
-            this.dataLocal.borrarNoticia(this.noticia);
+            this.dataLocal.borrarNoticia(this.noticia)
+            this.presentToast("Noticia Borrada");
           }else{
             this.dataLocal.guardarNoticia(this.noticia);
+            this.presentToast("Noticia agregada a favoritos");
           }
          
         }
