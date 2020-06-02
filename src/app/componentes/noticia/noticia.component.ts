@@ -12,13 +12,21 @@ import { DataLocalService } from 'src/app/services/data-local.service';
 export class NoticiaComponent implements OnInit {
 @Input() noticia:Article;
 @Input() i:number;
+@Input() enFavoritos;
+mensaje="Agregar a Favoritos"
+icono="star";
   constructor(private inAppBrowser:InAppBrowser,
     private actionSheetCtrl:ActionSheetController,
     private socialSharing:SocialSharing,
-    private dataLocal:DataLocalService) { }
+    private dataLocal:DataLocalService) { 
+      
+    }
 
   ngOnInit() {
-    
+    if(this.enFavoritos){
+      this.mensaje="Borrar de favoritos"
+      this.icono="trash"
+    }
   }
 
   abrirNoticia(){
@@ -48,11 +56,16 @@ export class NoticiaComponent implements OnInit {
         }
       }, 
       {
-        text: 'Agregar a Favoritos',
-        icon: 'star',
+        text: this.mensaje,
+        icon: this.icono,
         cssClass:'action-dark',
         handler: () => {
-          this.dataLocal.guardarNoticia(this.noticia);
+          if(this.enFavoritos){
+            this.dataLocal.borrarNoticia(this.noticia);
+          }else{
+            this.dataLocal.guardarNoticia(this.noticia);
+          }
+         
         }
       },
        {

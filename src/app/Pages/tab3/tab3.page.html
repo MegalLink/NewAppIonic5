@@ -7,7 +7,11 @@
 </ion-header>
 
 <ion-content  [fullscreen]="true" color="dark-blue">
-
-<app-noticias [noticias]="dataLocal.noticias"></app-noticias>
+<ion-slides  *ngIf="dataLocal.noticias.length==0" [options]="sliderOpts">
+  <ion-slide>
+  <ion-label>No hay favoritos</ion-label>
+  </ion-slide>
+</ion-slides>
+<app-noticias *ngIf="dataLocal.noticias.length>0" [enFavoritos]="true" [noticias]="dataLocal.noticias"></app-noticias>
  
 </ion-content>
