@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {environment} from '../../environments/environment'
+import {environment} from '../../environments/environment.prod'
 import { RespuestaTopHeadLines } from '../interfaces/interfaces';
 
 const apiKey=environment.apiKey;
